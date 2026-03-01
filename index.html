@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile</title>
+    <style>
+        /* --- CSS: デザインの設定 --- */
+        body {
+            font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+            background-color:
+#fce4ec; /* 薄いグレーの背景 */
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .card {
+            background: #fff;
+            width: 90%;
+            max-width: 450px;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05); /* 柔らかい影 */
+            text-align: center;
+        }
+
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #e0e0e0;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+            color: #2c3e50;
+        }
+
+        .job {
+            font-size: 0.9rem;
+            color: #999;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .intro {
+            font-size: 0.95rem;
+            text-align: left;
+            margin-bottom: 30px;
+            padding: 0 10px;
+        }
+
+        .skills {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            list-style: none;
+            padding: 0;
+        }
+
+        .skills li {
+            background: #edf2f7;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: #4a5568;
+            font-weight: bold;
+        }
+
+        .footer {
+            margin-top: 30px;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+
+        .sns-link {
+            text-decoration: none;
+            color: #3498db;
+            font-size: 0.9rem;
+            transition: opacity 0.3s;
+        }
+
+        .sns-link:hover {
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <img src="https://via.placeholder.com/150" alt="プロフィール写真" class="profile-img">
+
+        <h1>machiko</h1>
+
+        <span class="job">Web制作 学習中</span>
+
+        <p class="intro">
+Webデザイン・プログラミングの勉強を始めてみました！
+ど初心者のため手探り状態です（笑）
+美味しいもの・美しいものが好きです♡
+        </p>
+
+        <ul class="skills">
+            <li>HTML5</li>
+            <li>CSS3</li>
+            <li>JavaScript</li>
+            <li>Photography</li>
+        </ul>
+
+                
+<button id="helloBtn" class="message-button">挨拶を表示する</button>
+
+
+
+
+        <div class="footer">
+            <a href="#" class="sns-link">Twitter / X</a>
+            <span style="margin: 0 10px; color: #ccc;">|</span>
+            <a href="#" class="sns-link">Instagram</a>
+        </div>
+
+
+</div> <script>
+        const btn = document.getElementById('helloBtn');
+        btn.addEventListener('click', function() {
+            alert('こんにちは！よろしくお願いします！');
+        });
+    </script>
+
+
+</body>
+</html>
