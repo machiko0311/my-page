@@ -26,58 +26,66 @@
             text-align: center;
         }
 
-        /* ★アイコンと挨拶を中央で横並びにする（アイコンが左、挨拶が右）★ */
+        /* アイコンと挨拶を中央で横に並べる */
         .profile-header {
             display: flex;
             align-items: center;
-            justify-content: center; /* 左右中央に配置 */
-            gap: 15px;
+            justify-content: center;
+            gap: 20px;
             margin-bottom: 20px;
             width: 100%;
         }
 
-        /* アイコン：装飾なし・サイズ固定 */
+        /* アイコン：サイズ固定・装飾なし */
         .profile-img {
             width: 80px;
             height: auto;
             object-fit: contain;
-            flex-shrink: 0; /* タイピング中にサイズが変わらないよう固定 */
+            flex-shrink: 0;
         }
 
-        /* ★英語挨拶：上下のスラッシュ。幅を厳格に固定して突き抜けを防止★ */
+        /* ★英語挨拶：スラッシュの位置を物理的に固定する★ */
         .greeting-container {
-            font-style: italic;
-            color: #555;
-            font-size: 0.95rem;
-            line-height: 1.2;
-            text-align: center;
+            position: relative;
+            width: 150px; /* 全体の幅を固定 */
+            height: 60px; /* 上下スラッシュを含む高さを固定 */
             display: flex;
             flex-direction: column;
+            justify-content: center;
             align-items: center;
-            
-            /* ★最重要：幅を完全に固定。文字が増えても左に伸びるのを物理的に防ぐ★ */
-            width: 150px; 
-            flex-shrink: 0; 
-            min-height: 3.6em;
-        }
-
-        .slash-line {
-            display: block;
-            width: 100%;
             font-style: italic;
+            color: #555;
+            flex-shrink: 0;
         }
 
-        /* ★タイピングエリア：中央基準で表示★ */
+        /* スラッシュを「絶対配置」で固定し、文字に押されないようにする */
+        .slash-top {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            text-align: center;
+        }
+
+        .slash-bottom {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            text-align: center;
+        }
+
+        /* ★タイピングエリア：スラッシュの間で「中心」を動かさない★ */
         #eng-greeting-wrap {
             display: block;
-            margin: 2px 0;
-            min-height: 1.2em;
             text-align: center;
             width: 100%;
+            font-size: 0.95rem;
             white-space: nowrap;
-            overflow: hidden; /* 万が一、枠を超えても外には表示させない */
+            overflow: visible; /* 突き抜け防止は構造自体で行う */
         }
 
+        /* 日付：名前の上、斜体 */
         .date-slant {
             font-style: italic;
             color: #999;
@@ -194,9 +202,9 @@
         <img src="IMG_3942.png" alt="プロフィール写真" class="profile-img">
         
         <div class="greeting-container">
-            <span class="slash-line">／</span>
+            <span class="slash-top">／</span>
             <span id="eng-greeting-wrap"></span>
-            <span class="slash-line">＼</span>
+            <span class="slash-bottom">＼</span>
         </div>
     </div>
 
