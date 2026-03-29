@@ -26,56 +26,60 @@
             text-align: center;
         }
 
+        /* ★アイコンを左、挨拶を右に並べる設定（中央揃え）★ */
         .profile-header {
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
+            gap: 15px;
             margin-bottom: 20px;
             width: 100%;
         }
 
-        /* アイコン：中央配置、装飾なし */
+        /* アイコン：左側に配置、装飾なし */
         .profile-img {
-            width: 100px;
+            width: 80px;
             height: auto;
             object-fit: contain;
-            margin-bottom: 10px;
             display: block;
+            flex-shrink: 0;
         }
 
-        /* ★英語挨拶：上下のスラッシュで文字を挟む構造★ */
+        /* ★英語挨拶：アイコンの右側で、上下のスラッシュで挟む★ */
         .greeting-container {
             font-style: italic;
             color: #555;
             font-size: 0.95rem;
             line-height: 1.2;
             text-align: center;
-            margin: 0 auto;
-            /* 縦に並べる設定 */
             display: flex;
             flex-direction: column;
             align-items: center;
-            min-height: 3.6em; /* タイピング中も高さが動かないよう固定 */
+            /* タイピング中に全体が動かないよう幅を固定 */
+            width: 150px; 
+            min-height: 3.6em;
         }
 
         .slash-line {
             display: block;
             width: 100%;
             font-style: italic;
-            /* カッコの角度を微調整したい場合はここで指定 */
         }
 
-        /* ★タイピングエリア：上下のスラッシュの「間」に配置★ */
+        /* ★タイピングエリア：突き抜けを防止する設定★ */
         #eng-greeting-wrap {
             display: block;
             margin: 2px 0;
             min-height: 1.2em;
             text-align: center;
+            width: 100%;
+            overflow: hidden;
             white-space: nowrap;
+            /* 文字が左に突き抜けるのを防ぐ */
+            text-overflow: clip; 
         }
 
-        /* 日付：名前の上、中央配置、斜体 */
+        /* 日付：名前の上、斜体 */
         .date-slant {
             font-style: italic;
             color: #999;
@@ -128,7 +132,7 @@
             color: #333;
         }
 
-        /* 日本語挨拶ポップアップ */
+        /* 日本語挨拶ポップアップ（右下「閉じる」） */
         #greeting-modal-overlay {
             display: none;
             position: fixed;
@@ -190,6 +194,7 @@
 <div class="profile-card">
     <div class="profile-header">
         <img src="IMG_3942.png" alt="プロフィール写真" class="profile-img">
+        
         <div class="greeting-container">
             <span class="slash-line">／</span>
             <span id="eng-greeting-wrap"></span>
