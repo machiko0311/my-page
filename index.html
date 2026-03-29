@@ -1,69 +1,187 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>my-page</title>
+    <style>
+        /* 全体のレイアウト：中央寄せ */
+        body {
+            background-color: #fce4ec;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: serif;
+        }
+
+        /* プロフィールカード */
+        .profile-card {
+            background: #fff;
+            width: 90%;
+            max-width: 400px;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        /* アイコンと英語挨拶の横並び */
+        .profile-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        /* アイコンサイズ固定 */
+        .profile-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #eee;
+        }
+
+        /* 英語挨拶と日付のグループ */
+        .profile-text-group {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        /* 英語挨拶：斜体・一文字ずつ用 */
+        .greeting-slant {
+            font-style: italic;
+            color: #555;
+            margin: 0;
+            font-size: 0.95rem;
+            min-height: 1.2em;
+        }
+
+        /* ツールチップのコンテナ */
+        .tooltip-container {
+            position: relative;
+            display: inline-block;
+            cursor: help;
+            margin: 10px 0;
+        }
+
+        /* 学習中のテキスト */
+        .study-text {
+            color: #666;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        /* ツールチップ本体 */
+        .tooltip {
+            visibility: hidden;
+            width: 200px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 8px;
+            position: absolute;
+            z-index: 10;
+            bottom: 150%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.8rem;
+            font-style: normal;
+        }
+
+        .tooltip-container:hover .tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* 自己紹介文 */
+        .intro {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin: 20px 0;
+        }
+
+        /* ボタンと日本語挨拶 */
+        #show-greeting-btn {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 5px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #jp-greeting-display {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: #333;
+            min-height: 1.5em;
+        }
+    </style>
+</head>
 <body>
 
-    <div class="card"> <div class="profile-header">
-            <img src="IMG_3942.png" alt="プロフィール" class="profile-img" style="margin-bottom: 0;">
-            <div class="profile-text-group">
-                <p id="greeting-bubble" class="greeting-slant"></p>
-                <p id="today-date" style="color: #999; font-size: 0.85rem; font-style: italic; margin-top: 5px;"></p>
-            </div>
+<div class="profile-card">
+    <div class="profile-header">
+        <img src="profile.png" alt="プロフィール写真" class="profile-img">
+        <div class="profile-text-group">
+            <p id="eng-greeting" class="greeting-slant"></p>
+            <p id="today-date" style="color: #999; font-size: 0.8rem; font-style: italic; margin-top: 5px;"></p>
         </div>
+    </div>
 
-        <div class="content-container">
-            <h1>machiko</h1>
-
-            <span class="job" title="LinuxとSQLの基礎を実習中！">
-                <a href="#" style="text-decoration: none; color: inherit;">Web制作 学習中✏︎</a>
-            </span>
-
-            <p class="intro">
-                Webデザイン・プログラミングの勉強を始めてみました！<br>
-                ど初心者のため手探り状態です（笑）<br>
-                美味しいもの・美しいものが好きです♡
-            </p>
-
-            <div class="skills" style="list-style: none; display: flex; justify-content: center; gap: 10px; margin-bottom: 20px;">
-                <li style="background: #edf2f7; padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; color: #4a5568; font-weight: bold;">HTML5</li>
-                <li style="background: #edf2f7; padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; color: #4a5568; font-weight: bold;">CSS3</li>
-                <li style="background: #edf2f7; padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; color: #4a5568; font-weight: bold;">JavaScript</li>
-            </div>
-
-            <button id="show-greeting-btn" style="padding: 10px 20px; border-radius: 5px; border: 1px solid #ccc; background: #fff; cursor: pointer;">挨拶を表示する</button>
-        </div>
-
-        <div class="footer">
-            <a href="#" class="sns-link">Twitter / X</a>
-            <span style="margin: 0 10px; color: #ccc;">|</span>
-            <a href="#" class="sns-link">Instagram</a>
-        </div>
-
-    </div> <script>
-        // A. 日本語の挨拶ボタンの動作
-        // ボタンのID「show-greeting-btn」をしっかり捕まえます
-        const helloBtn = document.getElementById('show-greeting-btn');
-        helloBtn.addEventListener('click', function() {
-            alert('こんにちは！よろしくお願いします！');
-        });
-
-        // B. 英語の日付と「一文字ずつ出る」英語挨拶の動作
-        const now = new Date();
-        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-        document.getElementById('today-date').innerText = now.toLocaleDateString('en-US', options);
-
-        const hour = now.getHours();
-        let coreMessage = (hour >= 5 && hour < 12) ? "Good morning!" :
-                          (hour >= 12 && hour < 18) ? "Good afternoon!" : "Good evening!";
+    <div class="content-container">
+        <h1 style="margin: 0; font-size: 1.5rem;">machiko</h1>
         
-        // ご希望通りのスラッシュ形式
-        const fullMessage = "／ " + coreMessage + " ＼";
+        <div class="tooltip-container">
+            <p class="study-text">Web制作 学習中✏︎</p>
+            <span class="tooltip">LinuxとSQLの基礎を実習中！</span>
+        </div>
 
-        let i = 0;
-        function typeWriter() {
-            if (i < fullMessage.length) {
-                document.getElementById("greeting-bubble").innerHTML += fullMessage.charAt(i);
-                i++;
-                setTimeout(typeWriter, 100);
-            }
+        <p class="intro">
+            Webデザイン・プログラミングの勉強を始めてみました！<br>
+            ど初心者のため手探り状態です（笑）<br>
+            美味しいもの・美しいものが好きです♡
+        </p>
+
+        <p id="jp-greeting-display"></p>
+        <button id="show-greeting-btn">挨拶を表示する</button>
+    </div>
+</div>
+
+<script>
+    // 1. 日付表示
+    const now = new Date();
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    document.getElementById('today-date').innerText = now.toLocaleDateString('en-US', options);
+
+    // 2. 英語挨拶（斜体・一文字ずつ・スラッシュの向き修正）
+    const hour = now.getHours();
+    let engMsg = (hour >= 5 && hour < 12) ? "Good morning!" :
+                 (hour >= 12 && hour < 18) ? "Good afternoon!" : "Good evening!";
+    const fullEngMsg = "／ " + engMsg + " ＼";
+
+    let i = 0;
+    function typeEng() {
+        if (i < fullEngMsg.length) {
+            document.getElementById("eng-greeting").innerHTML += fullEngMsg.charAt(i);
+            i++;
+            setTimeout(typeEng, 100);
         }
-        typeWriter(); 
-    </script>
+    }
+    typeEng();
+
+    // 3. 日本語挨拶ボタン
+    document.getElementById('show-greeting-btn').addEventListener('click', function() {
+        document.getElementById('jp-greeting-display').innerText = "こんにちは！はじめまして！";
+    });
+</script>
+
 </body>
+</html>
