@@ -5,9 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>my-page</title>
     <style>
-        /* 全体のレイアウト：優しいピンク色の背景と中央寄せ */
         body {
-            background-color: #fce4ec; /* image_1.pngの背景色 */
+            background-color: #fce4ec;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -17,7 +16,6 @@
             color: #333;
         }
 
-        /* 白いカードの部分：四隅を丸く、影をつける */
         .profile-card {
             background: #fff;
             width: 90%;
@@ -28,64 +26,73 @@
             text-align: center;
         }
 
-        /* アイコンと英語挨拶の横並び */
         .profile-header {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 15px;
+            gap: 20px;
             margin-bottom: 20px;
         }
 
-        /* ★アイコンサイズ固定・円形★ */
+        /* アイコン：二重線デザイン */
         .profile-img {
             width: 80px;
             height: 80px;
             border-radius: 50%;
             object-fit: cover;
-            border: 2px solid #eee;
+            border: 1px solid #ddd;
+            padding: 3px;
+            background-color: #fff;
+            box-shadow: 0 0 0 1px #eee;
         }
 
-        /* 英語挨拶と日付のグループ */
-        .profile-text-group {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-        }
-
-        /* ★英語挨拶：斜体・一文字ずつ用★ */
-        .greeting-slant {
+        /* 英語挨拶：上下のスラッシュと斜体 */
+        .greeting-container {
             font-style: italic;
             color: #555;
-            margin: 0;
             font-size: 0.95rem;
+            line-height: 1.2;
+            text-align: center;
+        }
+
+        .slash-line {
+            display: block;
+            font-style: italic;
+        }
+
+        #eng-greeting {
+            display: block;
+            margin: 2px 0;
             min-height: 1.2em;
         }
 
-        /* ★日付：斜体★ */
+        /* 日付：名前の上、斜体 */
         .date-slant {
             font-style: italic;
             color: #999;
             font-size: 0.8rem;
-            margin-top: 5px;
+            margin: 10px 0 5px 0;
+            display: block;
         }
 
-        /* ツールチップのコンテナ */
+        h1 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
         .tooltip-container {
             position: relative;
             display: inline-block;
             cursor: help;
-            margin: 10px 0;
+            margin: 5px 0 15px 0;
         }
 
-        /* 学習中のテキスト：薄いグレー */
         .study-text {
             color: #999;
             font-size: 0.9rem;
             margin: 0;
         }
 
-        /* ツールチップ本体 */
         .tooltip {
             visibility: hidden;
             width: 200px;
@@ -110,32 +117,41 @@
             opacity: 1;
         }
 
-        /* 自己紹介文 */
         .intro {
             font-size: 0.9rem;
             line-height: 1.6;
-            margin: 20px 0;
+            margin-bottom: 20px;
         }
 
-        /* スキルタグの楕円形デザイン */
         .skill-tags {
-            margin-top: 15px;
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
             gap: 10px;
+            margin-bottom: 20px;
         }
 
         .skill-tag {
-            background-color: #eee; /* 薄いグレーの背景 */
-            color: #333;
+            background-color: #eee;
             padding: 5px 15px;
-            border-radius: 20px; /* ★楕円形★ */
+            border-radius: 20px;
             font-size: 0.8rem;
-            font-family: sans-serif; /* 読みやすさ重視 */
+            font-family: sans-serif;
         }
 
-        /* ボタンと日本語挨拶 */
+        .links {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+
+        .links a {
+            text-decoration: none;
+            color: #64b5f6;
+            font-size: 0.9rem;
+            margin: 0 10px;
+        }
+
         #show-greeting-btn {
             background-color: #fff;
             border: 1px solid #ccc;
@@ -143,14 +159,12 @@
             border-radius: 5px;
             cursor: pointer;
             font-size: 0.8rem;
-            color: #333;
-            margin-top: 20px;
+            margin-top: 15px;
         }
 
         #jp-greeting-display {
             margin-top: 10px;
             font-size: 0.9rem;
-            color: #333;
             min-height: 1.5em;
         }
     </style>
@@ -160,63 +174,62 @@
 <div class="profile-card">
     <div class="profile-header">
         <img src="IMG_3942.png" alt="プロフィール写真" class="profile-img">
-        <div class="profile-text-group">
-            <p id="eng-greeting" class="greeting-slant"></p>
-            <p id="today-date" class="date-slant"></p>
+        <div class="greeting-container">
+            <span class="slash-line">／</span>
+            <span id="eng-greeting"></span>
+            <span class="slash-line">＼</span>
         </div>
     </div>
 
-    <div class="content-container">
-        <h1 style="margin: 0; font-size: 1.5rem;">machiko</h1>
-        
-        <div class="tooltip-container">
-            <p class="study-text">Web制作 学習中✏︎</p>
-            <span class="tooltip">LinuxとSQLの基礎を実習中！</span>
-        </div>
+    <span id="today-date" class="date-slant"></span>
+    <h1>machiko</h1>
+    
+    <div class="tooltip-container">
+        <p class="study-text">Web制作 学習中✏︎</p>
+        <span class="tooltip">LinuxとSQLの基礎を実習中！</span>
+    </div>
 
-        <p class="intro">
-            Webデザイン・プログラミングの勉強を始めてみました！<br>
-            ど初心者のため手探り状態です（笑）<br>
-            美味しいもの・美しいものが好きです♡
-        </p>
+    <p class="intro">
+        Webデザイン・プログラミングの勉強を始めてみました！<br>
+        ど初心者のため手探り状態です（笑）<br>
+        美味しいもの・美しいものが好きです♡
+    </p>
 
-        <div class="skill-tags">
-            <span class="skill-tag">HTML5</span>
-            <span class="skill-tag">CSS3</span>
-            <span class="skill-tag">JavaScript</span>
-            <span class="skill-tag">Photography</span>
-        </div>
+    <div class="skill-tags">
+        <span class="skill-tag">HTML5</span>
+        <span class="skill-tag">CSS3</span>
+        <span class="skill-tag">JavaScript</span>
+        <span class="skill-tag">Photography</span>
+    </div>
 
-        <p id="jp-greeting-display"></p>
-        <button id="show-greeting-btn">挨拶を表示する</button>
+    <p id="jp-greeting-display"></p>
+    <button id="show-greeting-btn">挨拶を表示する</button>
+
+    <div class="links">
+        <a href="https://twitter.com/YOUR_ID" target="_blank">Twitter / X</a> | 
+        <a href="https://www.instagram.com/YOUR_ID" target="_blank">Instagram</a>
     </div>
 </div>
 
 <script>
-    // 1. 日付表示（英語・斜体用クラス適用）
     const now = new Date();
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     document.getElementById('today-date').innerText = now.toLocaleDateString('en-US', options);
 
-    // 2. 英語挨拶（斜体・一文字ずつ・スラッシュ）
     const hour = now.getHours();
     let engMsg = (hour >= 5 && hour < 12) ? "Good morning!" :
                  (hour >= 12 && hour < 18) ? "Good afternoon!" : "Good evening!";
     
-    // ★ここを修正しました：丸括弧ではなく、／と＼で挟みます★
-    const fullEngMsg = "／ " + engMsg + " ＼";
-
     let i = 0;
     function typeEng() {
-        if (i < fullEngMsg.length) {
-            document.getElementById("eng-greeting").innerHTML += fullEngMsg.charAt(i);
+        if (i < engMsg.length) {
+            document.getElementById("eng-greeting").innerHTML += engMsg.charAt(i);
             i++;
             setTimeout(typeEng, 100);
         }
     }
     typeEng();
 
-    // 3. 日本語挨拶ボタン
     document.getElementById('show-greeting-btn').addEventListener('click', function() {
         document.getElementById('jp-greeting-display').innerText = "こんにちは！はじめまして！";
     });
