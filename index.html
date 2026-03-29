@@ -99,7 +99,8 @@
 
     <div class="card">
         <img src="IMG_3942.png" alt="プロフィール" style="width: 80px; border-radius: 50%;">
-
+<p id="today-date" style="color: #888; font-size: 0.9rem; margin-top: 10px;"></p>
+       
         <h1>machiko</h1>
 
         <span class="job" title="LinuxとSQLの基礎を実習中！">
@@ -139,6 +140,10 @@ Webデザイン・プログラミングの勉強を始めてみました！
         });
     </script>
 
-
+<script>
+  const now = new Date();
+  const options = { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' };
+  document.getElementById('today-date').innerText = "今日は " + now.toLocaleDateString('ja-JP', options) + " です";
+</script>
 </body>
 </html>
