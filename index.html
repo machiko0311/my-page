@@ -93,12 +93,57 @@
         .sns-link:hover {
             opacity: 0.7;
         }
+   /* 吹き出しのコンテナ */
+.chat-container {
+    position: relative;
+    display: flex;
+    margin-left: 120px;
+    margin-bottom: 10px;
+}
+
+/* 吹き出し本体のデザイン */
+.bubble {
+    position: relative;
+    background: #fff;
+    border: 2px solid #fce4ec; /* 背景に合わせた薄いピンク */
+    border-radius: 15px;
+    padding: 8px 15px;
+    font-size: 0.9rem;
+    color: #555;
+    min-width: 100px;
+    min-height: 20px;
+}
+
+/* 吹き出しの「しっぽ」部分 */
+.bubble::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    margin-left: -10px;
+    border-width: 10px 10px 0;
+    border-style: solid;
+    border-color: #fff transparent transparent;
+}
+.bubble::before {
+    content: "";
+    position: absolute;
+    bottom: -13px;
+    left: 50%;
+    margin-left: -11px;
+    border-width: 11px 11px 0;
+    border-style: solid;
+    border-color: #fce4ec transparent transparent;
+}
     </style>
 </head>
 <body>
 
     <div class="card">
         <img src="IMG_3942.png" alt="プロフィール" style="width: 80px; border-radius: 50%;">
+        <div class="chat-container">
+  <div id="greeting-bubble" class="bubble"></div>
+</div>
 
        <p id="today-date" style="color: #999; font-size: 0.85rem; font-style: italic; margin-top: 10px;"></p>
         <h1>machiko</h1>
@@ -148,6 +193,30 @@ Webデザイン・プログラミングの勉強を始めてみました！
   
   // 「en-US（米国英語）」を指定し、余計な日本語を削除して表示します
   document.getElementById('today-date').innerText = now.toLocaleDateString('en-US', options);
+
+  // 2. 時間帯による挨拶の判定
+  const hour = now.getHours();
+  let message = "";
+  if (hour >= 5 && hour < 12) {
+    message = "Good morning!";
+  } else if (hour >= 12 && hour < 18) {
+    message = "Good afternoon!";
+  } else {
+    message = "Good evening!";
+  }
+
+  // 3. 一文字ずつ表示させる関数
+  let i = 0;
+  function typeWriter() {
+    if (i < message.length) {
+      document.getElementById("greeting-bubble").innerHTML += message.charAt(i);
+      i++;
+      setTimeout(typeWriter, 100); // 100ミリ秒ごとに次の一文字を表示
+    }
+  }
+
+  // 実行！
+  typeWriter();
 </script>
 </body>
 </html>
