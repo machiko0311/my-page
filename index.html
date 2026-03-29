@@ -34,21 +34,20 @@
             margin-bottom: 20px;
         }
 
-        /* アイコン：二重線デザイン */
+        /* ★アイコン：image_6.pngの境界線を再現★ */
         .profile-img {
             width: 80px;
             height: 80px;
             border-radius: 50%;
             object-fit: cover;
-            border: 1px solid #ddd;
-            padding: 3px;
-            background-color: #fff;
-            box-shadow: 0 0 0 1px #eee;
+            
+            /* 画像に馴染む、薄いグレーの円形境界線 */
+            border: 1px solid rgba(220, 220, 220, 0.7);
         }
 
-        /* 英語挨拶：上下のスラッシュと斜体 */
+        /* 英語挨拶：上下のスラッシュ、全体を斜体に指定 */
         .greeting-container {
-            font-style: italic;
+            font-style: italic; /* 確実に斜体 */
             color: #555;
             font-size: 0.95rem;
             line-height: 1.2;
@@ -60,19 +59,20 @@
             font-style: italic;
         }
 
-        #eng-greeting {
+        /* ★ここを修正しました：カッコの貫通防止用のコンテナ★ */
+        #eng-greeting-wrap {
             display: block;
             margin: 2px 0;
-            min-height: 1.2em;
+            min-height: 1.2em; /* 文字が出る前のスペース確保 */
         }
 
-        /* 日付：名前の上、斜体 */
+        /* 日付：名前の上、中央配置、斜体 */
         .date-slant {
-            font-style: italic;
+            font-style: italic; /* 確実に斜体 */
             color: #999;
             font-size: 0.8rem;
             margin: 10px 0 5px 0;
-            display: block;
+            display: block; /* 中央寄せのため */
         }
 
         h1 {
@@ -80,6 +80,7 @@
             font-size: 1.5rem;
         }
 
+        /* ツールチップ関連（学習中✏︎） */
         .tooltip-container {
             position: relative;
             display: inline-block;
@@ -88,7 +89,7 @@
         }
 
         .study-text {
-            color: #999;
+            color: #999; /* 薄いグレー */
             font-size: 0.9rem;
             margin: 0;
         }
@@ -109,7 +110,7 @@
             opacity: 0;
             transition: opacity 0.3s;
             font-size: 0.8rem;
-            font-style: normal;
+            font-style: normal; /* ツールチップは斜体ではない */
         }
 
         .tooltip-container:hover .tooltip {
@@ -117,12 +118,14 @@
             opacity: 1;
         }
 
+        /* 自己紹介文 */
         .intro {
             font-size: 0.9rem;
             line-height: 1.6;
             margin-bottom: 20px;
         }
 
+        /* スキルタグ：楕円形グレー */
         .skill-tags {
             display: flex;
             justify-content: center;
@@ -132,13 +135,14 @@
         }
 
         .skill-tag {
-            background-color: #eee;
+            background-color: #eee; /* 薄いグレーの背景 */
             padding: 5px 15px;
-            border-radius: 20px;
+            border-radius: 20px; /* 楕円形 */
             font-size: 0.8rem;
             font-family: sans-serif;
         }
 
+        /* SNSリンク */
         .links {
             margin-top: 20px;
             padding-top: 15px;
@@ -152,6 +156,7 @@
             margin: 0 10px;
         }
 
+        /* 日本語挨拶ボタン */
         #show-greeting-btn {
             background-color: #fff;
             border: 1px solid #ccc;
@@ -162,10 +167,28 @@
             margin-top: 15px;
         }
 
-        #jp-greeting-display {
+        /* ★日本語挨拶：表示エリアとバツボタン★ */
+        #jp-greeting-area {
+            display: none; /* 初期状態は非表示 */
+            justify-content: center;
+            align-items: center;
             margin-top: 10px;
+            gap: 10px;
+        }
+
+        #jp-greeting-display {
             font-size: 0.9rem;
             min-height: 1.5em;
+        }
+
+        #close-greeting-btn {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: #999;
+            padding: 0;
+            line-height: 1;
         }
     </style>
 </head>
@@ -176,7 +199,7 @@
         <img src="IMG_3942.png" alt="プロフィール写真" class="profile-img">
         <div class="greeting-container">
             <span class="slash-line">／</span>
-            <span id="eng-greeting"></span>
+            <span id="eng-greeting-wrap"></span>
             <span class="slash-line">＼</span>
         </div>
     </div>
@@ -202,7 +225,10 @@
         <span class="skill-tag">Photography</span>
     </div>
 
-    <p id="jp-greeting-display"></p>
+    <div id="jp-greeting-area">
+        <span id="jp-greeting-display"></span>
+        <button id="close-greeting-btn">×</button>
+    </div>
     <button id="show-greeting-btn">挨拶を表示する</button>
 
     <div class="links">
@@ -212,10 +238,12 @@
 </div>
 
 <script>
+    // 1. 日付表示（英語・斜体用クラス適用）
     const now = new Date();
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     document.getElementById('today-date').innerText = now.toLocaleDateString('en-US', options);
 
+    // 2. 英語挨拶（斜体・一文字ずつ・カッコの貫通防止）
     const hour = now.getHours();
     let engMsg = (hour >= 5 && hour < 12) ? "Good morning!" :
                  (hour >= 12 && hour < 18) ? "Good afternoon!" : "Good evening!";
@@ -223,15 +251,30 @@
     let i = 0;
     function typeEng() {
         if (i < engMsg.length) {
-            document.getElementById("eng-greeting").innerHTML += engMsg.charAt(i);
+            // ★カッコの貫通を防ぐため、文字だけをコンテナに追加★
+            document.getElementById("eng-greeting-wrap").innerHTML += engMsg.charAt(i);
             i++;
             setTimeout(typeEng, 100);
         }
     }
     typeEng();
 
-    document.getElementById('show-greeting-btn').addEventListener('click', function() {
-        document.getElementById('jp-greeting-display').innerText = "こんにちは！はじめまして！";
+    // 3. 日本語挨拶ボタン：表示と非表示（バツボタン）
+    const showBtn = document.getElementById('show-greeting-btn');
+    const closeBtn = document.getElementById('close-greeting-btn');
+    const greetingArea = document.getElementById('jp-greeting-area');
+    const greetingDisplay = document.getElementById('jp-greeting-display');
+
+    showBtn.addEventListener('click', function() {
+        greetingDisplay.innerText = "こんにちは！はじめまして！";
+        greetingArea.style.display = 'flex'; // エリアを表示
+        showBtn.style.display = 'none'; // 表示ボタンを隠す
+    });
+
+    closeBtn.addEventListener('click', function() {
+        greetingArea.style.display = 'none'; // エリアを非表示
+        showBtn.style.display = 'inline-block'; // 表示ボタンを戻す
+        greetingDisplay.innerText = ""; // 文字をクリア
     });
 </script>
 
