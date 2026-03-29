@@ -5,18 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>my-page</title>
     <style>
-        /* 全体のレイアウト：中央寄せ */
+        /* 全体のレイアウト：優しいピンク色の背景と中央寄せ */
         body {
-            background-color: #fce4ec;
+            background-color: #fce4ec; /* image_1.pngの背景色 */
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             margin: 0;
             font-family: serif;
+            color: #333;
         }
 
-        /* プロフィールカード */
+        /* 白いカードの部分：四隅を丸く、影をつける */
         .profile-card {
             background: #fff;
             width: 90%;
@@ -36,7 +37,7 @@
             margin-bottom: 20px;
         }
 
-        /* アイコンサイズ固定 */
+        /* ★アイコンサイズ固定・円形★ */
         .profile-img {
             width: 80px;
             height: 80px;
@@ -52,13 +53,21 @@
             align-items: flex-start;
         }
 
-        /* 英語挨拶：斜体・一文字ずつ用 */
+        /* ★英語挨拶：斜体・一文字ずつ用★ */
         .greeting-slant {
             font-style: italic;
             color: #555;
             margin: 0;
             font-size: 0.95rem;
             min-height: 1.2em;
+        }
+
+        /* ★日付：斜体★ */
+        .date-slant {
+            font-style: italic;
+            color: #999;
+            font-size: 0.8rem;
+            margin-top: 5px;
         }
 
         /* ツールチップのコンテナ */
@@ -69,9 +78,9 @@
             margin: 10px 0;
         }
 
-        /* 学習中のテキスト */
+        /* 学習中のテキスト：薄いグレー */
         .study-text {
-            color: #666;
+            color: #999;
             font-size: 0.9rem;
             margin: 0;
         }
@@ -108,6 +117,24 @@
             margin: 20px 0;
         }
 
+        /* スキルタグの楕円形デザイン */
+        .skill-tags {
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill-tag {
+            background-color: #eee; /* 薄いグレーの背景 */
+            color: #333;
+            padding: 5px 15px;
+            border-radius: 20px; /* ★楕円形★ */
+            font-size: 0.8rem;
+            font-family: sans-serif; /* 読みやすさ重視 */
+        }
+
         /* ボタンと日本語挨拶 */
         #show-greeting-btn {
             background-color: #fff;
@@ -115,6 +142,9 @@
             padding: 5px 15px;
             border-radius: 5px;
             cursor: pointer;
+            font-size: 0.8rem;
+            color: #333;
+            margin-top: 20px;
         }
 
         #jp-greeting-display {
@@ -129,10 +159,10 @@
 
 <div class="profile-card">
     <div class="profile-header">
-        <img src="profile.png" alt="プロフィール写真" class="profile-img">
+        <img src="IMG_3942.png" alt="プロフィール写真" class="profile-img">
         <div class="profile-text-group">
             <p id="eng-greeting" class="greeting-slant"></p>
-            <p id="today-date" style="color: #999; font-size: 0.8rem; font-style: italic; margin-top: 5px;"></p>
+            <p id="today-date" class="date-slant"></p>
         </div>
     </div>
 
@@ -150,21 +180,30 @@
             美味しいもの・美しいものが好きです♡
         </p>
 
+        <div class="skill-tags">
+            <span class="skill-tag">HTML5</span>
+            <span class="skill-tag">CSS3</span>
+            <span class="skill-tag">JavaScript</span>
+            <span class="skill-tag">Photography</span>
+        </div>
+
         <p id="jp-greeting-display"></p>
         <button id="show-greeting-btn">挨拶を表示する</button>
     </div>
 </div>
 
 <script>
-    // 1. 日付表示
+    // 1. 日付表示（英語・斜体用クラス適用）
     const now = new Date();
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     document.getElementById('today-date').innerText = now.toLocaleDateString('en-US', options);
 
-    // 2. 英語挨拶（斜体・一文字ずつ・スラッシュの向き修正）
+    // 2. 英語挨拶（斜体・一文字ずつ・スラッシュ）
     const hour = now.getHours();
     let engMsg = (hour >= 5 && hour < 12) ? "Good morning!" :
                  (hour >= 12 && hour < 18) ? "Good afternoon!" : "Good evening!";
+    
+    // ★ここを修正しました：丸括弧ではなく、／と＼で挟みます★
     const fullEngMsg = "／ " + engMsg + " ＼";
 
     let i = 0;
