@@ -26,26 +26,25 @@
             text-align: center;
         }
 
-        /* ★アイコンを左、挨拶を右に並べる設定（中央揃え）★ */
+        /* ★アイコンと挨拶を中央で横並びにする（アイコンが左、挨拶が右）★ */
         .profile-header {
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: center; /* 左右中央に配置 */
             gap: 15px;
             margin-bottom: 20px;
             width: 100%;
         }
 
-        /* アイコン：左側に配置、装飾なし */
+        /* アイコン：装飾なし・サイズ固定 */
         .profile-img {
             width: 80px;
             height: auto;
             object-fit: contain;
-            display: block;
-            flex-shrink: 0;
+            flex-shrink: 0; /* タイピング中にサイズが変わらないよう固定 */
         }
 
-        /* ★英語挨拶：アイコンの右側で、上下のスラッシュで挟む★ */
+        /* ★英語挨拶：上下のスラッシュ。幅を厳格に固定して突き抜けを防止★ */
         .greeting-container {
             font-style: italic;
             color: #555;
@@ -55,8 +54,10 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            /* タイピング中に全体が動かないよう幅を固定 */
+            
+            /* ★最重要：幅を完全に固定。文字が増えても左に伸びるのを物理的に防ぐ★ */
             width: 150px; 
+            flex-shrink: 0; 
             min-height: 3.6em;
         }
 
@@ -66,20 +67,17 @@
             font-style: italic;
         }
 
-        /* ★タイピングエリア：突き抜けを防止する設定★ */
+        /* ★タイピングエリア：中央基準で表示★ */
         #eng-greeting-wrap {
             display: block;
             margin: 2px 0;
             min-height: 1.2em;
             text-align: center;
             width: 100%;
-            overflow: hidden;
             white-space: nowrap;
-            /* 文字が左に突き抜けるのを防ぐ */
-            text-overflow: clip; 
+            overflow: hidden; /* 万が一、枠を超えても外には表示させない */
         }
 
-        /* 日付：名前の上、斜体 */
         .date-slant {
             font-style: italic;
             color: #999;
