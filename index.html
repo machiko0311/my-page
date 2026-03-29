@@ -143,8 +143,11 @@ Webデザイン・プログラミングの勉強を始めてみました！
 
 <script>
   const now = new Date();
-  const options = { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' };
-  document.getElementById('today-date').innerText = "今日は " + now.toLocaleDateString('ja-JP', options) + " です";
+  // 英語表記用の設定（フルスペルで表示する設定です）
+  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  
+  // 「en-US（米国英語）」を指定し、余計な日本語を削除して表示します
+  document.getElementById('today-date').innerText = now.toLocaleDateString('en-US', options);
 </script>
 </body>
 </html>
