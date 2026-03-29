@@ -26,7 +26,6 @@
             text-align: center;
         }
 
-        /* ★アイコンと挨拶を中央で縦に並べる構造へ★ */
         .profile-header {
             display: flex;
             flex-direction: column;
@@ -36,43 +35,47 @@
             width: 100%;
         }
 
-        /* ★アイコン：中央配置、装飾なし★ */
+        /* アイコン：中央配置、装飾なし */
         .profile-img {
-            width: 100px; /* 見栄えに合わせたサイズ */
+            width: 100px;
             height: auto;
             object-fit: contain;
-            margin-bottom: 15px; /* 挨拶との間隔 */
+            margin-bottom: 10px;
             display: block;
         }
 
-        /* ★英語挨拶：幅を固定し、文字が絶対に左右へ突き抜けない設定★ */
+        /* ★英語挨拶：上下のスラッシュで文字を挟む構造★ */
         .greeting-container {
             font-style: italic;
             color: #555;
             font-size: 0.95rem;
             line-height: 1.2;
-            width: 200px; /* カッコを含めた全体の幅を固定 */
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            text-align: center;
             margin: 0 auto;
+            /* 縦に並べる設定 */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 3.6em; /* タイピング中も高さが動かないよう固定 */
         }
 
         .slash-line {
-            flex-shrink: 0; /* スラッシュ自体は縮ませない */
-            padding: 0 5px;
+            display: block;
+            width: 100%;
+            font-style: italic;
+            /* カッコの角度を微調整したい場合はここで指定 */
         }
 
-        /* ★タイピングエリア：中央揃えを維持し、はみ出しをカット★ */
+        /* ★タイピングエリア：上下のスラッシュの「間」に配置★ */
         #eng-greeting-wrap {
-            display: inline-block;
+            display: block;
+            margin: 2px 0;
+            min-height: 1.2em;
             text-align: center;
-            max-width: 160px; /* スラッシュの内側に収まる最大幅 */
-            overflow: hidden;
             white-space: nowrap;
-            text-overflow: clip; /* 左側へ突き抜けるのを防ぐ */
         }
 
+        /* 日付：名前の上、中央配置、斜体 */
         .date-slant {
             font-style: italic;
             color: #999;
@@ -125,7 +128,7 @@
             color: #333;
         }
 
-        /* ポップアップ（日本語挨拶） */
+        /* 日本語挨拶ポップアップ */
         #greeting-modal-overlay {
             display: none;
             position: fixed;
