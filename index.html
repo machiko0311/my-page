@@ -34,30 +34,26 @@
             margin-bottom: 20px;
         }
 
-        /* ★アイコン：元の二重線デザインに戻しました★ */
+        /* ★アイコン：枠線・角丸を一切含まず、元のイラスト形状を表示★ */
         .profile-img {
             width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 1px solid #ddd;
-            padding: 3px;
-            background-color: #fff;
-            box-shadow: 0 0 0 1px #eee;
+            height: auto;
+            object-fit: contain;
             flex-shrink: 0; /* タイピング中にサイズが変わらないよう固定 */
         }
 
-        /* ★英語挨拶：幅を固定してアイコンを動かさない・突き抜けを防止★ */
+        /* ★英語挨拶：スラッシュでの挟み込みデザインを維持★ */
         .greeting-container {
             font-style: italic;
             color: #555;
             font-size: 0.95rem;
             line-height: 1.2;
             text-align: center;
-            width: 120px; /* 幅を固定し、アイコンの位置を動かさない */
+            width: 150px; /* 十分な幅を確保しアイコンの移動を防止 */
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
         }
 
         .slash-line {
@@ -65,17 +61,17 @@
             width: 100%;
         }
 
-        /* 文字が突き抜けないよう、中央揃えで幅を制限 */
+        /* ★突き抜け防止：幅を100%に制限し、中央揃えを徹底★ */
         #eng-greeting-wrap {
             display: block;
             margin: 2px 0;
             min-height: 1.2em;
             width: 100%;
+            text-align: center;
             overflow: hidden;
             white-space: nowrap;
         }
 
-        /* 日付：名前の上、斜体 */
         .date-slant {
             font-style: italic;
             color: #999;
@@ -89,40 +85,10 @@
             font-size: 1.5rem;
         }
 
-        .tooltip-container {
-            position: relative;
-            display: inline-block;
-            cursor: help;
-            margin: 5px 0 15px 0;
-        }
-
         .study-text {
             color: #999;
             font-size: 0.9rem;
-            margin: 0;
-        }
-
-        .tooltip {
-            visibility: hidden;
-            width: 200px;
-            background-color: #555;
-            color: #fff;
-            text-align: center;
-            border-radius: 6px;
-            padding: 8px;
-            position: absolute;
-            z-index: 10;
-            bottom: 150%;
-            left: 50%;
-            transform: translateX(-50%);
-            opacity: 0;
-            transition: opacity 0.3s;
-            font-size: 0.8rem;
-        }
-
-        .tooltip-container:hover .tooltip {
-            visibility: visible;
-            opacity: 1;
+            margin: 5px 0 15px 0;
         }
 
         .intro {
@@ -147,19 +113,6 @@
             font-family: sans-serif;
         }
 
-        .links {
-            margin-top: 20px;
-            padding-top: 15px;
-            border-top: 1px solid #eee;
-        }
-
-        .links a {
-            text-decoration: none;
-            color: #64b5f6;
-            font-size: 0.9rem;
-            margin: 0 10px;
-        }
-
         #show-greeting-btn {
             background-color: #eee;
             border: none;
@@ -171,7 +124,7 @@
             color: #333;
         }
 
-        /* ★画像通りのポップアップ（ダイアログ）★ */
+        /* ★日本語挨拶：ポップアップ形式（右下「閉じる」）★ */
         #greeting-modal-overlay {
             display: none;
             position: fixed;
@@ -193,7 +146,6 @@
             padding: 25px 20px 15px;
             text-align: center;
             box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-            font-family: sans-serif;
         }
 
         .modal-text {
@@ -214,6 +166,19 @@
             display: block;
             text-align: right;
         }
+
+        .links {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+
+        .links a {
+            text-decoration: none;
+            color: #64b5f6;
+            font-size: 0.9rem;
+            margin: 0 10px;
+        }
     </style>
 </head>
 <body>
@@ -230,11 +195,7 @@
 
     <span id="today-date" class="date-slant"></span>
     <h1>machiko</h1>
-    
-    <div class="tooltip-container">
-        <p class="study-text">Web制作 学習中✏︎</p>
-        <span class="tooltip">LinuxとSQLの基礎を実習中！</span>
-    </div>
+    <p class="study-text">Web制作 学習中✏︎</p>
 
     <p class="intro">
         Webデザイン・プログラミングの勉強を始めてみました！<br>
@@ -252,8 +213,7 @@
     <button id="show-greeting-btn">挨拶を表示する</button>
 
     <div class="links">
-        <a href="https://twitter.com/YOUR_ID" target="_blank">Twitter / X</a> | 
-        <a href="https://www.instagram.com/YOUR_ID" target="_blank">Instagram</a>
+        <a href="#">Twitter / X</a> | <a href="#">Instagram</a>
     </div>
 </div>
 
