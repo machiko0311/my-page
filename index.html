@@ -12,7 +12,6 @@
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            /* 全体的にサンセリフ（ゴシック体）を適用 */
             font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
             color: #333;
         }
@@ -25,32 +24,32 @@
             border-radius: 20px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
             text-align: center;
+            position: relative;
         }
 
-        /* ★アイコンを中央固定し、挨拶を右に浮かせるための親要素★ */
+        /* アイコンエリア：高さを確保して日付との重なりを防止 */
         .profile-header {
-            position: relative;
-            width: 100%;
-            height: 120px; /* アイコンと挨拶が収まる高さ */
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
+            width: 100%;
+            min-height: 120px; 
         }
 
-        /* ★アイコン：カードの真ん中に完全に固定★ */
         .profile-img {
             width: 100px;
             height: auto;
             object-fit: contain;
-            z-index: 1;
+            flex-shrink: 0;
         }
 
-        /* ★英語挨拶：アイコンの右側に絶対配置。これでアイコンは動きません★ */
+        /* 英語挨拶：アイコンの右側に「固定幅」で配置（突き抜け防止） */
         .greeting-container {
             position: absolute;
-            left: calc(50% + 60px); /* アイコンの中心(50%)から右へ60pxずらした位置 */
-            width: 140px;
+            left: calc(50% + 55px);
+            top: 50px;
+            width: 135px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -65,34 +64,55 @@
             text-align: center;
         }
 
+        /* タイピング中の左突き抜けを物理的に防ぐ */
         #eng-greeting-wrap {
             display: block;
-            min-height: 1.2em;
+            width: 100%;
             text-align: center;
+            min-height: 1.2em;
             white-space: nowrap;
         }
 
+        /* 日付：アイコンと重ならない位置に配置 */
         .date-slant {
             font-style: italic;
             color: #999;
             font-size: 0.8rem;
-            margin: 10px 0 5px 0;
+            margin: 5px 0 5px 0;
             display: block;
         }
 
-        /* 名前：ここだけセリフ体 */
         h1 {
             margin: 0;
             font-size: 1.5rem;
             font-family: serif;
         }
 
-        /* ★学習中・紹介文：画像に合わせたフォント（サンセリフ）★ */
+        /* 学習中：ホバーで正しい文言を表示 */
         .study-text {
             color: #999;
             font-size: 0.9rem;
             margin: 5px 0 15px 0;
             font-family: sans-serif;
+            cursor: pointer;
+            position: relative;
+            display: inline-block;
+        }
+
+        /* ★正しい文言に修正済み★ */
+        .study-text:hover::after {
+            content: "LinuxとSQLの基礎を実習中！"; 
+            position: absolute;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.75);
+            color: #fff;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            white-space: nowrap;
+            z-index: 20;
         }
 
         .intro {
@@ -102,21 +122,20 @@
             font-family: sans-serif;
         }
 
-        /* スキルタグ：サンセリフ */
-        .skill-tag {
-            background-color: #eee;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-family: sans-serif;
-        }
-
         .skill-tags {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
             gap: 10px;
             margin-bottom: 20px;
+        }
+
+        .skill-tag {
+            background-color: #eee;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-family: sans-serif;
         }
 
         #show-greeting-btn {
@@ -129,14 +148,12 @@
             color: #333;
         }
 
-        /* 日本語挨拶ポップアップ（右下「閉じる」） */
+        /* 日本語挨拶ポップアップ */
         #greeting-modal-overlay {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             background: rgba(0, 0, 0, 0.4);
             z-index: 100;
             justify-content: center;
@@ -149,14 +166,8 @@
             max-width: 300px;
             border-radius: 15px;
             padding: 25px 20px 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-        }
-
-        .modal-text {
-            font-size: 1rem;
-            margin-bottom: 20px;
-            color: #000;
             text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
         }
 
         #close-modal-btn {
@@ -191,7 +202,6 @@
 <div class="profile-card">
     <div class="profile-header">
         <img src="IMG_3942.png" alt="プロフィール写真" class="profile-img">
-        
         <div class="greeting-container">
             <span class="slash-line">／</span>
             <span id="eng-greeting-wrap"></span>
