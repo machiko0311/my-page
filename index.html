@@ -27,14 +27,14 @@
             position: relative;
         }
 
-        /* アイコンエリア：高さを確保して日付との重なりを防止 */
+        /* アイコンエリア：高さをしっかり確保 */
         .profile-header {
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 10px;
+            margin-bottom: 25px;
             width: 100%;
-            min-height: 120px; 
+            min-height: 120px;
         }
 
         .profile-img {
@@ -44,41 +44,44 @@
             flex-shrink: 0;
         }
 
-        /* 英語挨拶：アイコンの右側に「固定幅」で配置（突き抜け防止） */
+        /* ★英語挨拶：突き抜けを物理的に防ぐ新しい構造★ */
         .greeting-container {
             position: absolute;
             left: calc(50% + 55px);
-            top: 50px;
-            width: 135px;
+            top: 45px;
+            width: 120px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            font-style: italic;
+            /* 強制的に斜体にする */
+            font-style: italic !important;
             color: #555;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
         }
 
         .slash-line {
             display: block;
             width: 100%;
             text-align: center;
+            font-style: italic !important;
         }
 
-        /* タイピング中の左突き抜けを物理的に防ぐ */
+        /* ★ここが重要：右側のスラッシュを起点に文字を出すことで左突き抜けを防止★ */
         #eng-greeting-wrap {
             display: block;
             width: 100%;
-            text-align: center;
+            text-align: center; /* 中心を基準にタイピング */
             min-height: 1.2em;
             white-space: nowrap;
+            font-style: italic !important;
         }
 
-        /* 日付：アイコンと重ならない位置に配置 */
+        /* 日付：重なりを防止し、確実に斜体にする */
         .date-slant {
-            font-style: italic;
+            font-style: italic !important;
             color: #999;
             font-size: 0.8rem;
-            margin: 5px 0 5px 0;
+            margin: 15px 0 5px 0;
             display: block;
         }
 
@@ -88,7 +91,7 @@
             font-family: serif;
         }
 
-        /* 学習中：ホバーで正しい文言を表示 */
+        /* 学習中：ホバー設定 */
         .study-text {
             color: #999;
             font-size: 0.9rem;
@@ -99,20 +102,19 @@
             display: inline-block;
         }
 
-        /* ★正しい文言に修正済み★ */
         .study-text:hover::after {
             content: "LinuxとSQLの基礎を実習中！"; 
             position: absolute;
-            bottom: 125%;
+            bottom: 130%;
             left: 50%;
             transform: translateX(-50%);
-            background: rgba(0,0,0,0.75);
+            background: rgba(0,0,0,0.8);
             color: #fff;
             padding: 6px 12px;
             border-radius: 6px;
             font-size: 0.75rem;
             white-space: nowrap;
-            z-index: 20;
+            z-index: 50;
         }
 
         .intro {
@@ -148,7 +150,7 @@
             color: #333;
         }
 
-        /* 日本語挨拶ポップアップ */
+        /* 日本語挨拶ポップアップ（右下「閉じる」） */
         #greeting-modal-overlay {
             display: none;
             position: fixed;
