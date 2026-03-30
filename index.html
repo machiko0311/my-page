@@ -12,7 +12,8 @@
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            font-family: serif;
+            /* 全体的にサンセリフ（ゴシック体）を適用 */
+            font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
             color: #333;
         }
 
@@ -26,66 +27,51 @@
             text-align: center;
         }
 
-        /* アイコンと挨拶を中央で横に並べる */
+        /* ★アイコンを中央固定し、挨拶を右に浮かせるための親要素★ */
         .profile-header {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 20px;
+            position: relative;
             width: 100%;
+            height: 120px; /* アイコンと挨拶が収まる高さ */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
         }
 
-        /* アイコン：サイズ固定・装飾なし */
+        /* ★アイコン：カードの真ん中に完全に固定★ */
         .profile-img {
-            width: 80px;
+            width: 100px;
             height: auto;
             object-fit: contain;
-            flex-shrink: 0;
+            z-index: 1;
         }
 
-        /* ★英語挨拶：スラッシュの位置を物理的に固定する★ */
+        /* ★英語挨拶：アイコンの右側に絶対配置。これでアイコンは動きません★ */
         .greeting-container {
-            position: relative;
-            width: 150px; /* 全体の幅を固定 */
-            height: 60px; /* 上下スラッシュを含む高さを固定 */
+            position: absolute;
+            left: calc(50% + 60px); /* アイコンの中心(50%)から右へ60pxずらした位置 */
+            width: 140px;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
             font-style: italic;
             color: #555;
-            flex-shrink: 0;
+            font-size: 0.9rem;
         }
 
-        /* スラッシュを「絶対配置」で固定し、文字に押されないようにする */
-        .slash-top {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
+        .slash-line {
+            display: block;
+            width: 100%;
             text-align: center;
         }
 
-        .slash-bottom {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            text-align: center;
-        }
-
-        /* ★タイピングエリア：スラッシュの間で「中心」を動かさない★ */
         #eng-greeting-wrap {
             display: block;
+            min-height: 1.2em;
             text-align: center;
-            width: 100%;
-            font-size: 0.95rem;
             white-space: nowrap;
-            overflow: visible; /* 突き抜け防止は構造自体で行う */
         }
 
-        /* 日付：名前の上、斜体 */
         .date-slant {
             font-style: italic;
             color: #999;
@@ -94,21 +80,35 @@
             display: block;
         }
 
+        /* 名前：ここだけセリフ体 */
         h1 {
             margin: 0;
             font-size: 1.5rem;
+            font-family: serif;
         }
 
+        /* ★学習中・紹介文：画像に合わせたフォント（サンセリフ）★ */
         .study-text {
             color: #999;
             font-size: 0.9rem;
             margin: 5px 0 15px 0;
+            font-family: sans-serif;
         }
 
         .intro {
             font-size: 0.9rem;
             line-height: 1.6;
             margin-bottom: 20px;
+            font-family: sans-serif;
+        }
+
+        /* スキルタグ：サンセリフ */
+        .skill-tag {
+            background-color: #eee;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-family: sans-serif;
         }
 
         .skill-tags {
@@ -119,14 +119,6 @@
             margin-bottom: 20px;
         }
 
-        .skill-tag {
-            background-color: #eee;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-family: sans-serif;
-        }
-
         #show-greeting-btn {
             background-color: #eee;
             border: none;
@@ -134,7 +126,6 @@
             border-radius: 20px;
             cursor: pointer;
             font-size: 0.8rem;
-            margin-top: 15px;
             color: #333;
         }
 
@@ -158,7 +149,6 @@
             max-width: 300px;
             border-radius: 15px;
             padding: 25px 20px 15px;
-            text-align: center;
             box-shadow: 0 10px 25px rgba(0,0,0,0.2);
         }
 
@@ -166,6 +156,7 @@
             font-size: 1rem;
             margin-bottom: 20px;
             color: #000;
+            text-align: center;
         }
 
         #close-modal-btn {
@@ -202,9 +193,9 @@
         <img src="IMG_3942.png" alt="プロフィール写真" class="profile-img">
         
         <div class="greeting-container">
-            <span class="slash-top">／</span>
+            <span class="slash-line">／</span>
             <span id="eng-greeting-wrap"></span>
-            <span class="slash-bottom">＼</span>
+            <span class="slash-line">＼</span>
         </div>
     </div>
 
