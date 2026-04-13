@@ -251,6 +251,28 @@
     }
     typeEng();
 
+    // ★ここから「カード全体に桜を表示する」命令★
+    const card = document.querySelector('.profile-card');
+    if (month === 4) {
+        const sakuraImg = document.createElement('img');
+        sakuraImg.src = 'IMG_4127.gif'; // アップロードしたファイル名
+        sakuraImg.alt = '背景の桜';
+        
+        // CSSをJavaScriptから設定（背景全体に広げる）
+        sakuraImg.style.position = 'absolute';
+        sakuraImg.style.top = '0';
+        sakuraImg.style.left = '0';
+        sakuraImg.style.width = '100%';
+        sakuraImg.style.height = '100%';
+        sakuraImg.style.objectFit = 'cover';   // カードの形に合わせて切り抜く
+        sakuraImg.style.zIndex = '0';          // 文字（zIndex:1以上）より後ろへ
+        sakuraImg.style.opacity = '0.4';       // ★ここでお好みの透け具合に調整（0.1〜1.0）
+        sakuraImg.style.borderRadius = '20px'; // カードの角丸に合わせる
+        sakuraImg.style.pointerEvents = 'none'; // 画像がボタン操作を邪魔しないようにする
+
+        card.appendChild(sakuraImg);
+    }
+
     const showBtn = document.getElementById('show-greeting-btn');
     const closeBtn = document.getElementById('close-modal-btn');
     const overlay = document.getElementById('greeting-modal-overlay');
