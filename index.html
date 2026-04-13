@@ -48,8 +48,8 @@
         .greeting-container {
             position: absolute;
             left: calc(50% + 55px);
-            top: 45px;
-            width: 120px;
+            top: 50px;
+            width: 130px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -59,22 +59,13 @@
             font-size: 0.95rem;
         }
 
-        .slash-line {
+        #eng-greeting-wrap {
             display: block;
             width: 100%;
             text-align: center;
             font-style: italic !important;
         }
 
-        /* ★ここが重要：右側のスラッシュを起点に文字を出すことで左突き抜けを防止★ */
-        #eng-greeting-wrap {
-            display: block;
-            width: 100%;
-            text-align: center; /* 中心を基準にタイピング */
-            min-height: 1.2em;
-            white-space: nowrap;
-            font-style: italic !important;
-        }
 
         /* 日付：重なりを防止し、確実に斜体にする */
         .date-slant {
