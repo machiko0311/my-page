@@ -283,5 +283,16 @@
     closeBtn.addEventListener('click', () => overlay.style.display = 'none');
 </script>
 
+<section id="calculator">
+    <h2>簡易計算機</h2>
+    <input type="number" id="num1"
+    placeholder="数字1">
+    <span> +　</span>
+    <input type="number" id="num2"
+    placehoider="数字2">
+    <button onclick="calculate()">計算する！</button>
+    <p>答え：<span id="result">0</span></p>
+</section>
+
 </body>
 </html>
