@@ -1,296 +1,336 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>my-page</title>
-<style>
-body {
-background-color: #fce4ec;
-display: flex;
-flex-direction: column;
-justify-content: flex-start;
-align-items: center;
-min-height: 100vh;
-margin: 0;
-padding: 40px 20px;
-font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
-color: #333;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>my-page</title>
+    <style>
+        body {
+            background-color: #fce4ec;
+            display: flex;
+            flex-direction: column; 
+            justify-content: flex-start;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 40px 20px;
+            font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+            color: #333;
+        }
 
-.profile-card {
-background: #fff;
-width: 100%;
-max-width: 400px;
-padding: 30px;
-border-radius: 20px;
-box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-text-align: center;
-position: relative;
-overflow: hidden;
-margin-bottom: 30px;
-}
+        .profile-card, .calc-card {
+            background: #fff;
+            width: 100%;
+            max-width: 400px;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            text-align: center;
+            position: relative;
+            overflow: hidden; 
+            margin-bottom: 30px;
+        }
 
-.profile-card > *:not(img[alt="背景の桜"]) {
-position: relative;
-z-index: 1;
-}
+        .profile-card > *:not(img[alt="背景 of 桜"]) {
+            position: relative;
+            z-index: 1;
+        }
 
-.profile-header {
-display: flex;
-justify-content: center;
-align-items: center;
-margin-bottom: 25px;
-width: 100%;
-min-height: 120px;
-}
+        .profile-header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 25px;
+            width: 100%;
+            min-height: 120px;
+        }
 
-.profile-img {
-width: 100px;
-height: auto;
-object-fit: contain;
-flex-shrink: 0;
-}
+        .profile-img {
+            width: 100px;
+            height: auto;
+            object-fit: contain;
+            flex-shrink: 0;
+        }
 
-.greeting-container {
-position: absolute;
-left: calc(50% + 55px);
-top: 80px;
-width: 130px;
-display: flex;
-flex-direction: column;
-align-items: center;
-font-style: italic !important;
-color: #555;
-font-size: 0.95rem;
-}
+        .greeting-container {
+            position: absolute;
+            left: calc(50% + 55px);
+            top: 80px;
+            width: 130px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-style: italic !important;
+            color: #555;
+            font-size: 0.95rem;
+        }
 
-#eng-greeting-wrap {
-display: block;
-width: 100%;
-text-align: center;
-font-style: italic !important;
-}
+        #eng-greeting-wrap {
+            display: block;
+            width: 100%;
+            text-align: center;
+            font-style: italic !important;
+        }
 
-.date-slant {
-font-style: italic !important;
-color: #999;
-font-size: 0.8rem;
-margin: 15px 0 5px 0;
-display: block;
-}
+        .date-slant {
+            font-style: italic !important;
+            color: #999;
+            font-size: 0.8rem;
+            margin: 15px 0 5px 0;
+            display: block;
+        }
 
-h1 { margin: 0; font-size: 1.5rem; font-family: serif; }
+        h1 { margin: 0; font-size: 1.5rem; font-family: serif; }
 
-/* ツールチップ（学習中のメッセージ）のスタイル */
-.study-text {
-color: #999;
-font-size: 0.9rem;
-margin: 5px 0 15px 0;
-font-family: sans-serif;
-cursor: pointer;
-position: relative;
-display: inline-block;
-}
+        .study-text {
+            color: #999;
+            font-size: 0.9rem;
+            margin: 5px 0 15px 0;
+            font-family: sans-serif;
+            cursor: pointer;
+            position: relative;
+            display: inline-block;
+        }
 
-.study-text:hover::after {
-content: "LinuxとSQLの基礎を実習中！";
-position: absolute;
-bottom: 130%;
-left: 50%;
-transform: translateX(-50%);
-background: rgba(0,0,0,0.8);
-color: #fff;
-padding: 6px 12px;
-border-radius: 6px;
-font-size: 0.75rem;
-white-space: nowrap;
-z-index: 50;
-}
+        .study-text:hover::after {
+            content: "LinuxとSQLの基礎を実習中！"; 
+            position: absolute;
+            bottom: 130%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.8);
+            color: #fff;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            white-space: nowrap;
+            z-index: 50;
+        }
 
-.intro { font-size: 0.9rem; line-height: 1.6; margin-bottom: 20px; }
+        .intro { font-size: 0.9rem; line-height: 1.6; margin-bottom: 20px; }
 
-.skill-tags {
-display: flex;
-justify-content: center;
-flex-wrap: wrap;
-gap: 10px;
-margin-bottom: 20px;
-}
+        .skill-tags {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
 
-.skill-tag {
-background-color: #eee;
-padding: 5px 15px;
-border-radius: 20px;
-font-size: 0.8rem;
-}
+        .skill-tag {
+            background-color: #eee;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
 
-#show-greeting-btn {
-background-color: #eee;
-border: none;
-padding: 5px 15px;
-border-radius: 20px;
-cursor: pointer;
-font-size: 0.8rem;
-color: #333;
-}
+        #show-greeting-btn, .action-btn {
+            background-color: #eee;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            color: #333;
+            transition: 0.3s;
+        }
 
-#greeting-modal-overlay {
-display: none;
-position: fixed;
-top: 0; left: 0;
-width: 100%; height: 100%;
-background: rgba(0, 0, 0, 0.4);
-z-index: 100;
-justify-content: center;
-align-items: center;
-}
+        #show-greeting-btn:hover, .action-btn:hover {
+            background-color: #e0e0e0;
+        }
 
-#greeting-modal {
-background: #f0f0f5;
-width: 80%;
-max-width: 300px;
-border-radius: 15px;
-padding: 25px 20px 15px;
-text-align: center;
-}
+        #greeting-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+        }
 
-#close-modal-btn {
-background: none;
-border: none;
-color: #007aff;
-font-size: 1rem;
-cursor: pointer;
-width: 100%;
-padding-top: 10px;
-border-top: 1px solid #ccc;
-display: block;
-text-align: right;
-}
+        #greeting-modal {
+            background: #f0f0f5;
+            width: 80%;
+            max-width: 300px;
+            border-radius: 15px;
+            padding: 25px 20px 15px;
+            text-align: center;
+        }
 
-.links { margin-top: 20px; padding-top: 15px; border-top: 1px solid #eee; }
-.links a { text-decoration: none; color: #64b5f6; font-size: 0.9rem; margin: 0 10px; }
-</style>
+        #close-modal-btn {
+            background: none;
+            border: none;
+            color: #007aff;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+            padding-top: 10px;
+            border-top: 1px solid #ccc;
+            display: block;
+            text-align: right;
+        }
+
+        .links { margin-top: 20px; padding-top: 15px; border-top: 1px solid #eee; }
+        .links a { text-decoration: none; color: #64b5f6; font-size: 0.9rem; margin: 0 10px; }
+        
+        input[type="number"] {
+            width: 70px;
+            padding: 8px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            outline: none;
+        }
+
+        select {
+            padding: 8px;
+            border-radius: 8px;
+            border: 1px solid #eee;
+            background: #fff;
+        }
+    </style>
 </head>
 <body>
 
 <div class="profile-card">
-<div class="profile-header">
-<img src="IMG_3942.png" alt="プロフィール写真" class="profile-img">
-<div class="greeting-container">
-<span id="eng-greeting-wrap"></span>
+    <div class="profile-header">
+        <img src="IMG_3942.png" alt="プロフィール写真" class="profile-img">
+        <div class="greeting-container">
+            <span id="eng-greeting-wrap"></span>
+        </div>
+    </div>
+
+    <span id="today-date" class="date-slant"></span>
+    <h1>machiko</h1>
+    <p class="study-text">Web制作 学習中✏︎</p>
+
+    <p class="intro">
+        Webデザイン・プログラミングの勉強を始めてみました！<br>
+        ど初心者のため手探り状態です（泣）<br>
+        美味しいもの・美しいものが好きです♡
+    </p>
+
+    <div class="skill-tags">
+        <span class="skill-tag">HTML5</span>
+        <span class="skill-tag">CSS3</span>
+        <span class="skill-tag">JavaScript</span>
+        <span class="skill-tag">Photography</span>
+    </div>
+
+    <button id="show-greeting-btn">挨拶を表示する</button>
+
+    <div class="links">
+        <a href="#">Twitter / X</a> | <a href="#">Instagram</a>
+    </div>
 </div>
-</div>
 
-<span id="today-date" class="date-slant"></span>
-<h1>machiko</h1>
-<p class="study-text">Web制作 学習中✏︎</p>
-
-<p class="intro">
-Webデザイン・プログラミングの勉強を始めてみました！<br>
-ど初心者のため手探り状態です（泣）<br>
-美味しいもの・美しいものが好きです♡
-</p>
-
-<div class="skill-tags">
-<span class="skill-tag">HTML5</span>
-<span class="skill-tag">CSS3</span>
-<span class="skill-tag">JavaScript</span>
-<span class="skill-tag">Photography</span>
-</div>
-
-<button id="show-greeting-btn">挨拶を表示する</button>
-
-<div class="links">
-<a href="#">Twitter / X</a> | <a href="#">Instagram</a>
-</div>
-</div>
-
-<section id="calculator" style="text-align: center; background: #fff; padding: 30px; border-radius: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); width: 100%; max-width: 400px; position: relative;">
-<h2 style="font-family: serif; font-size: 1.2rem; margin-bottom: 20px;">簡易計算機</h2>
-<div style="margin-bottom: 15px;">
-<input type="number" id="num1" placeholder="数字1" style="width: 70px; padding: 8px; border: 1px solid #eee; border-radius: 8px; outline: none;">
-<div style="margin-bottom: 15px;">
-    <input type="number" id="num1" placeholder="数字1" style="width: 70px; padding: 8px; border: 1px solid #eee; border-radius: 8px;">
+<section class="calc-card">
+    <h2 style="font-family: serif; font-size: 1.2rem; margin-bottom: 20px;">簡易計算機</h2>
     
-    <select id="operator" style="padding: 8px; border-radius: 8px; border: 1px solid #eee; margin: 0 5px;">
-        <option value="add">+</option>
-        <option value="sub">−</option>
-        <option value="mul">×</option>
-        <option value="div">÷</option>
-    </select>
+    <div style="margin-bottom: 20px; display: flex; justify-content: center; align-items: center; gap: 8px;">
+        <input type="number" id="num1" placeholder="数字1">
+        
+        <select id="operator">
+            <option value="add">+</option>
+            <option value="sub">−</option>
+            <option value="mul">×</option>
+            <option value="div">÷</option>
+        </select>
+        
+        <input type="number" id="num2" placeholder="数字2">
+    </div>
+
+    <button onclick="calculate()" class="action-btn">計算する！</button>
     
-    <input type="number" id="num2" placeholder="数字2" style="width: 70px; padding: 8px; border: 1px solid #eee; border-radius: 8px;">
-</div>
-<input type="number" id="num2" placeholder="数字2" style="width: 70px; padding: 8px; border: 1px solid #eee; border-radius: 8px; outline: none;">
-</div>
-<button onclick="calculate()" style="background-color: #eee; border: none; padding: 8px 20px; border-radius: 20px; cursor: pointer; font-size: 0.9rem; color: #333;">
-計算する！
-</button>
-<p style="margin-top: 20px; font-size: 1rem;">
-答え： <span id="result" style="font-weight: bold; font-size: 1.3rem; color: #f06292;">0</span>
-</p>
+    <p style="margin-top: 20px; font-size: 1rem;">
+        答え： <span id="result" style="font-weight: bold; font-size: 1.3rem; color: #f06292;">0</span>
+    </p>
+</section>
+
+<section class="calc-card">
+    <h2 style="font-family: serif; font-size: 1.2rem; margin-bottom: 10px;">今日のおみくじ</h2>
+    <p id="omikuji-result" style="font-size: 1.1rem; color: #64b5f6; min-height: 1.5em; margin: 15px 0;">？！？！？</p>
+    <button onclick="drawOmikuji()" class="action-btn">占う！</button>
 </section>
 
 <div id="greeting-modal-overlay">
-<div id="greeting-modal">
-<div class="modal-text">こんにちは！よろしくお願いします！</div>
-<button id="close-modal-btn">閉じる</button>
-</div>
+    <div id="greeting-modal">
+        <div class="modal-text">こんにちは！よろしくお願いします！</div>
+        <button id="close-modal-btn">閉じる</button>
+    </div>
 </div>
 
 <script>
-const now = new Date();
-const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-document.getElementById('today-date').innerText = now.toLocaleDateString('en-US', options);
+    // 日付の表示
+    const now = new Date();
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    document.getElementById('today-date').innerText = now.toLocaleDateString('en-US', options);
 
-const hour = now.getHours();
-const month = now.getMonth() + 1;
+    // 挨拶のタイピングアニメーション
+    const hour = now.getHours();
+    const month = now.getMonth() + 1;
+    let engMsg = (hour >= 5 && hour < 12) ? "Good morning!" :
+                 (hour >= 12 && hour < 18) ? "Good afternoon!" : "Good evening!";
+    
+    let i = 0;
+    function typeEng() {
+        if (i < engMsg.length) {
+            document.getElementById("eng-greeting-wrap").innerHTML += engMsg.charAt(i);
+            i++;
+            setTimeout(typeEng, 100);
+        }
+    }
+    typeEng();
 
-let engMsg = (hour >= 5 && hour < 12) ? "Good morning!" :
-(hour >= 12 && hour < 18) ? "Good afternoon!" : "Good evening!";
-
-let i = 0;
-function typeEng() {
-if (i < engMsg.length) {
-document.getElementById("eng-greeting-wrap").innerHTML += engMsg.charAt(i);
-i++;
-setTimeout(typeEng, 100);
-}
-}
-typeEng();
-
-const card = document.querySelector('.profile-card');
-if (month === 4) {
-const sakuraImg = document.createElement('img');
-sakuraImg.src = 'IMG_4110.gif';
-sakuraImg.alt = '背景の桜';
-sakuraImg.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:0;opacity:0.3;pointer-events:none;';
-card.appendChild(sakuraImg);
-}
-
-const showBtn = document.getElementById('show-greeting-btn');
-const closeBtn = document.getElementById('close-modal-btn');
-const overlay = document.getElementById('greeting-modal-overlay');
-
-showBtn.addEventListener('click', () => overlay.style.display = 'flex');
-closeBtn.addEventListener('click', () => overlay.style.display = 'none');
-
-function calculate() {
-    const v1 = Number(document.getElementById('num1').value);
-    const v2 = Number(document.getElementById('num2').value);
-    const op = document.getElementById('operator').value; // どの記号が選ばれたか
-    let result = 0;
-
-    if (op === 'add') { result = v1 + v2; }
-    else if (op === 'sub') { result = v1 - v2; }
-    else if (op === 'mul') { result = v1 * v2; }
-    else if (op === 'div') { 
-        result = v2 !== 0 ? v1 / v2 : "エラー（0で割れません）"; 
+    // 桜の演出
+    const card = document.querySelector('.profile-card');
+    if (month === 4) {
+        const sakuraImg = document.createElement('img');
+        sakuraImg.src = 'IMG_4110.gif'; 
+        sakuraImg.alt = '背景 of 桜';
+        sakuraImg.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:0;opacity:0.3;pointer-events:none;';
+        card.appendChild(sakuraImg);
     }
 
-    document.getElementById('result').innerText = result;
-}
+    // モーダル制御
+    const showBtn = document.getElementById('show-greeting-btn');
+    const closeBtn = document.getElementById('close-modal-btn');
+    const overlay = document.getElementById('greeting-modal-overlay');
+
+    showBtn.addEventListener('click', () => overlay.style.display = 'flex');
+    closeBtn.addEventListener('click', () => overlay.style.display = 'none');
+
+    // 計算機能
+    function calculate() {
+        const v1 = Number(document.getElementById('num1').value);
+        const v2 = Number(document.getElementById('num2').value);
+        const op = document.getElementById('operator').value;
+        let result = 0;
+
+        if (op === 'add') { result = v1 + v2; }
+        else if (op === 'sub') { result = v1 - v2; }
+        else if (op === 'mul') { result = v1 * v2; }
+        else if (op === 'div') { 
+            result = v2 !== 0 ? v1 / v2 : "エラー"; 
+        }
+        document.getElementById('result').innerText = result;
+    }
+
+    // おみくじ機能
+    function drawOmikuji() {
+        const options = [
+            "大吉：Disneyソングを歌って運気アップ！",
+            "中吉：美味しいパスタがラッキーアイテム",
+            "小吉：深呼吸してリラックス",
+            "吉：新しいコードが書けるようになるかも！",
+            "machiko運：今日は最高の一日になります♡"
+        ];
+
+        const result = options[Math.floor(Math.random() * options.length)];
+        // innerTextの綴りを修正しました
+        document.getElementById('omikuji-result').innerText = result;
+    }
 </script>
 
 </body>
